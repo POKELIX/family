@@ -25,9 +25,9 @@ jobs:
       # --- 关键修改步骤开始 ---
       - name: Prepare Image Name
         run: |
-          # 将用户名转换为全小写，并存入环境变量 REPO_LOWER
+        
           echo "REPO_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      # --- 关键修改步骤结束 ---
+
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -46,7 +46,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            # 使用上面转换好的环境变量 env.REPO_LOWER
+      
             ghcr.io/${{ env.REPO_LOWER }}/lk:8180
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
